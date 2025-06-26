@@ -1,12 +1,11 @@
 <?php
-$host = '127.0.0.1:3308';
+$host = 'db'; // this matches the `service` name in docker-compose.yml
 $user = 'root';
-$password = ""; // keep it empty as your MySQL has no password
-$dbname = 'bbms';
+$pass = '';
+$db = 'bbms';
 
-$connection = mysqli_connect($host, $user, $password, $dbname);
-
-if (!$connection) {
-    die("Connection failed: " . mysqli_connect_error());
+$con = new mysqli($host, $user, $pass, $db);
+if ($con->connect_error) {
+    die("Connection failed: " . $con->connect_error);
 }
 ?>
