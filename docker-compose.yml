@@ -4,7 +4,8 @@ services:
   web:
     build: .
     ports:
-      - "800:80"
+      - "800:80"        # maps Apache inside container to port 800 on host
+      - "4434:443"      # optional, if using HTTPS
     depends_on:
       - db
     volumes:
@@ -17,4 +18,4 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: bbms
     ports:
-      - "3308:3306"
+      - "3308:3306"     # maps MySQL inside container to 3308 on host
