@@ -1,12 +1,13 @@
 <?php
-$host = '127.0.0.1:3308';
-$user = 'root';
-$password = ""; // keep it empty as your MySQL has no password
-$dbname = 'bbms';
+$con = new mysqli(
+    getenv('MYSQLHOST'),
+    getenv('MYSQLUSER'),
+    getenv('MYSQLPASSWORD'),
+    getenv('MYSQLDATABASE'),
+    getenv('MYSQLPORT') ?: 3306
+);
 
-$connection = mysqli_connect($host, $user, $password, $dbname);
-
-if (!$connection) {
-    die("Connection failed: " . mysqli_connect_error());
+if ($con->connect_error) {
+    die("Connection failed: " . $con->connect_error);
 }
 ?>
