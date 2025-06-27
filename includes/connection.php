@@ -1,7 +1,12 @@
 <?php
-$con = new mysqli("dpg-d1ept3fdiees73b011h0-a", "bbms_db_r8om_user", "bbms_db_r8om_user","bbms", "5432");
+$host = '127.0.0.1:3308';
+$user = 'root';
+$password = ""; // keep it empty as your MySQL has no password
+$dbname = 'bbms';
 
-if ($con->connect_error) {
-    die("Connection failed: " . $con->connect_error);
+$connection = mysqli_connect($host, $user, $password, $dbname);
+
+if (!$connection) {
+    die("Connection failed: " . mysqli_connect_error());
 }
 ?>
