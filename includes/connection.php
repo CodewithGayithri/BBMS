@@ -1,5 +1,5 @@
 <?php
-$con = new mysqli(
+$connection = new mysqli(
     getenv('MYSQLHOST'),
     getenv('MYSQLUSER'),
     getenv('MYSQLPASSWORD'),
@@ -7,7 +7,7 @@ $con = new mysqli(
     getenv('MYSQLPORT') ?: 3306
 );
 
-if ($con->connect_error) {
-    die("Connection failed: " . $con->connect_error);
+if ($connection->connect_error) {
+    die("Connection failed: " . $connection->connect_error);
 }
 ?>
