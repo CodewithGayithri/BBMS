@@ -82,9 +82,7 @@ if(isset($_POST['register'])){
     </div>
 <div class="container-fluid">
 <div class="row">
-    <div class="col-md-12 bg-danger" id="footer">
-        &copy 2022 CSEtutorials.com
-    </div>
+    
 </div>
 </div>
 </body>
