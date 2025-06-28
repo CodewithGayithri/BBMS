@@ -45,4 +45,5 @@ $sno = 1;
                             // Short blood group code
                             switch ($row['blood_group']) {
                                 case 'A+': $bg = 'AP'; break;
-                                case 'B+': $bg = 'BP'; break;
+                                case 'B+': $bg = 'BP'; break;}
+                        }
