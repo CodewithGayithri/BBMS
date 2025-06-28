@@ -247,9 +247,7 @@ while($row = mysqli_fetch_assoc($query_run)){
     </div>
 <div class="container-fluid">
 <div class="row">
-    <div class="col-md-12 bg-danger" id="footer">
-        &copy 2022 CSEtutorials.com
-    </div>
+    
 </div>
 </div>
 </body>
