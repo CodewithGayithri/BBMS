@@ -48,4 +48,12 @@ $sno = 1;
                                 case 'B+': $bg = 'BP'; break;
                             }
                         }
-                    }
+                    } // ✅ closed while loop
+                    ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
