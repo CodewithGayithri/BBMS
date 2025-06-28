@@ -67,7 +67,7 @@
         <div class="col-10  m-auto">
         <h4>Our centers?</h4>
         <div class="card container">
-            <h4>Jaipur</h4>
+            <h4>Jaipur</h4> 
             <hr>
             <p>The Jaipur center efficiently manages blood donations and inventory for hospitals across Rajasthan, ensuring quick access to safe blood during emergencies.</p>
         </div>
