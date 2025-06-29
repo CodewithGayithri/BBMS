@@ -1,3 +1,6 @@
+<?php 
+session_start();
+?>
 <html>
     <body>
         <div class="row">
@@ -13,7 +16,6 @@
                     <th>Action</th>
                 </thead>
                 <?php 
-                    session_start();
                     include('../includes/connection.php');
                     $query = "select * from donors";
                     $query_run = mysqli_query($connection,$query);
