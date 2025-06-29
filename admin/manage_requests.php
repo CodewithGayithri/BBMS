@@ -1,59 +1,63 @@
-<?php
+<?php 
 session_start();
-include('../includes/connection.php');
-
-// Fetch pending blood requests
-$query = "SELECT * FROM requests WHERE status = 0";
-$query_run = mysqli_query($connection, $query);
-$sno = 1;
 ?>
-<!DOCTYPE html>
 <html>
-<head>
-    <title>Manage Blood Requests</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <div class="container mt-5">
+    <body>
         <div class="row">
             <div class="col-md-10 m-auto">
-                <center><h4><u>Manage Blood Requests</u></h4></center><br>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>S.No</th>
-                            <th>Request ID</th>
-                            <th>Patient Name</th>
-                            <th>Mobile No</th>
-                            <th>Blood Group</th>
-                            <th>Units (in ml)</th>
-                            <th>Reason</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <?php 
-                    while ($row = mysqli_fetch_assoc($query_run)) {
-                        // Securely cast patient ID to integer to avoid SQL injection
-                        $patient_id = (int)$row['patient_id'];
-
-                        $query1 = "SELECT name, mobile FROM patients WHERE id = $patient_id";
-                        $query_run1 = mysqli_query($connection, $query1);
-
-                        if ($row1 = mysqli_fetch_assoc($query_run1)) {
-                            // Short blood group code
-                            switch ($row['blood_group']) {
-                                case 'A+': $bg = 'AP'; break;
-                                case 'B+': $bg = 'BP'; break;
+            <br><center><h4><u>Manage Blood Requests</u></h4><br></center>
+            <table class="table">
+                <thead>
+                    <th>S.No</th>
+                    <th>Request ID</th>
+                    <th>Patient Name</th>
+                    <th>Mobile No</th>
+                    <th>Blood group</th>
+                    <th>Units(in ml)</th>
+                    <th>Reason</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </thead>
+                <?php 
+                    include('../includes/connection.php');
+                    $query = "select * from requests where status = 0";
+                    $query_run = mysqli_query($connection,$query);
+                    $sno = 1;
+                    while($row = mysqli_fetch_assoc($query_run)){
+                        $query1 = "select name,mobile from patients where id = $row[patient_id]";
+                        $query_run1 = mysqli_query($connection,$query1);
+                        while($row1 = mysqli_fetch_assoc($query_run1)){
+                            if($row['blood_group'] == 'A+'){
+                                $bg = 'AP';
+                            }elseif($row['blood_group'] == 'B+'){
+                                $bg = 'BP';
+                            }elseif($row['blood_group'] == 'AB+'){
+                                $bg = 'ABP';
+                            }elseif($row['blood_group'] == 'O+'){
+                                $bg = 'OP';
+                            }else{
+                                $bg = $row['blood_group'];
                             }
+                        ?>
+                        <tr>
+                            <td><?php echo $sno; ?></td>
+                            <td><?php echo $row['id']; ?></td>
+                            <td><?php echo $row1['name']; ?></td>
+                            <td><?php echo $row1['mobile']; ?></td>
+                            <td><?php echo $row['blood_group']; ?></td>
+                            <td><?php echo $row['no_units']; ?></td>
+                            <td><?php echo $row['reason']; ?></td>
+                            <td><?php if($row['status'] == 0){echo '<span class="badge bg-secondary">No Action</span>';} ?></td>
+                            <td><a class="btn btn-sm btn-success" href="accept_req.php?rid=<?php echo $row['id']; ?>&bg=<?php echo $bg; ?>&nu=<?php echo $row['no_units']; ?>">Approve</a>
+                            <a class="btn btn-sm btn-danger" href="reject_req.php?rid=<?php echo $row['id']; ?>">Reject</a></td>
+                        </tr>
+                        <?php
                         }
-                    } // ✅ closed while loop
-                    ?>
-                    </tbody>
-                </table>
+                        $sno++;
+                    }
+                ?>
+            </table> 
             </div>
-        </div>
-    </div>
-</body>
+        </div>  
+    </body>
 </html>
